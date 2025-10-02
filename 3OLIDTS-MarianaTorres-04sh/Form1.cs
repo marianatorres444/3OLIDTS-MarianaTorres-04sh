@@ -35,17 +35,10 @@ namespace _3OLIDTS_MarianaTorres_04sh
                 textbox.Clear();
             }
         }
-
-        private void validarEdad(object sender, EventArgs e)
+        private bool EsTextoValido(string texto)
         {
-            TextBox textbox = (TextBox)sender;
-            if (!EdadValida(textbox.Text))
-            {
-                MessageBox.Show("Ingrese un valor entero valido para la edad", "Error Edad", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                //textbox.Clear();
-            }
+            return Regex.IsMatch(texto, @"^[a-zA-Z\s]+$");
         }
-
         private void validarApellidos(object sender, EventArgs e)
         {
             TextBox textbox = (TextBox)sender;
@@ -54,6 +47,37 @@ namespace _3OLIDTS_MarianaTorres_04sh
                 MessageBox.Show("Por favor ingrese valores correctos para el apellidos", "Error Nombre", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 textbox.Clear();
+            }
+        }
+        private bool EstaturaValida(string valor)
+        {
+            decimal resultado;
+            return decimal.TryParse(valor, out resultado);
+            //return false;
+        }
+        private bool EdadValida(string valor)
+        {
+            int resultado;
+            return int.TryParse(valor, out resultado);
+            //return false;
+        }
+        private void validarEstatura(object sender, EventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            if (!EdadValida(textbox.Text))
+            {
+                MessageBox.Show("Ingrese un valor decimal valido para la estatura", "Error Estatura", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                //textbox.Clear();
+            }
+        }
+
+        private void validarEdad(object sender, EventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            if (!EdadValida(textbox.Text))
+            {
+                MessageBox.Show("Ingrese un valor entero valido para la edad", "Error Edad", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                //textbox.Clear();
             }
         }
 
@@ -71,36 +95,7 @@ namespace _3OLIDTS_MarianaTorres_04sh
                 //textbox.Clear();
             }
         }
-
-        private void validarEstatura(object sender, EventArgs e)
-        {
-            TextBox textbox = (TextBox)sender;
-            if (!EstaturaValida(textbox.Text))
-            {
-                MessageBox.Show("Ingrese un valor decimal valido para la estatura", "Error Estatura", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                //textbox.Clear();
-            }
-        }
-
-        private bool EsTextoValido(string texto)
-        {
-            return Regex.IsMatch(texto, @"^[a-zA-Z\s]+$");
-        }
-
-        private bool EstaturaValida(string valor)
-        {
-            decimal resultado;
-            return decimal.TryParse(valor, out resultado);
-            //return false;
-        }
-
-        private bool EdadValida(string valor)
-        {
-            int resultado;
-            return int.TryParse(valor, out resultado);
-            //return false;
-        }
-
+  
         private bool EsEnteroValido10Digitos(string valor)
         {
             //long resultado;
@@ -108,11 +103,6 @@ namespace _3OLIDTS_MarianaTorres_04sh
             return valor.Length == 10 && valor.All(char.IsDigit) && long.TryParse(valor, out _);
             //string formato = @"^\d{10}$";
             //return Regex.IsWatch(valor, formato);
-        }
-
-        private void lbNombre_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void lim_Click(object sender, EventArgs e)
@@ -136,21 +126,21 @@ namespace _3OLIDTS_MarianaTorres_04sh
 
             string genero = "";
 
-            if (rb2.Checked)
+            if (rb.Checked)
             {
-                genero = "Femenino";
+                genero = "Hombre";
             }
-            else if (rb.Checked)
+            else if (rb2.Checked)
             {
-                genero = "Masculino";
+                genero = "Mujer";
             }
 
             if (!string.IsNullOrEmpty(tbapellidos.Text) && !string.IsNullOrEmpty(tbnombre.Text) && !string.IsNullOrEmpty(tbedad.Text) && !string.IsNullOrEmpty(tbestatura.Text) && !string.IsNullOrEmpty(tbtelefono.Text))
             {
                 string datos = $"Nombre:{nombre}\n\rApellidos:{apellidos}\n\r" +
                     $"Telefono:{telefono}\n\rEdad:{edad}\n\rEstatura:{estatura}\n\rGenero:{genero}\n\r";
-                //el \r es inicio de renglon
-                //MessageBox.Show(datos,"Valores ingresados", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                //MessageBox.Show(datos,"Información de Registro",
+                //MessageBoxButtons.OK,MessageBoxIcon.Information);
                 string ruta = "C:\\Users\\marde\\Downloads\\nada.txt";
                 // string ruta = "C:\\Users\\marde\\Downloads";
                 // string ruta = @"C:\Users\mariana torres\Downloads";
